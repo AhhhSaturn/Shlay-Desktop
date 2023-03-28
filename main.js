@@ -1,8 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-if (require('electron-squirrel-startup')) app.quit();
-
 const loadMainWindow = () => {
     const mainWindow = new BrowserWindow({
         fullscreen: false,
@@ -11,7 +9,8 @@ const loadMainWindow = () => {
         alwaysOnTop: true,
         frame: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: false,
+            contextIsolation: true,
         }
     });
     mainWindow.loadFile(path.join(__dirname, '/src/index.html'));
