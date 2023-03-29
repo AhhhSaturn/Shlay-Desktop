@@ -3,15 +3,15 @@ const path = require('path');
 
 const loadMainWindow = () => {
     const mainWindow = new BrowserWindow({
-        fullscreen: false,
-        width: 1600,
-        height: 1200,
+        fullscreen: true,
         alwaysOnTop: true,
-        frame: false,
+        frame: false,  
+        resizable: false,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
-        }
+            // devTools: !app.isPackaged,
+        },
     });
     mainWindow.loadFile(path.join(__dirname, '/src/index.html'));
 }
