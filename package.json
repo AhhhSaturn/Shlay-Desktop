@@ -1,13 +1,14 @@
 {
   "name": "shlay-desktop",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Shlay Desktop",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
     "dist": "electron-forge build --win --x64",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "build-all": "npm run make -- --platform=win32 ; npm run make -- --platform=linux"
   },
   "repository": {
     "type": "git",
