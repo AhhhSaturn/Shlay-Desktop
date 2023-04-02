@@ -1,25 +1,22 @@
+
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: __dirname + '/images/icon',
+  },
   rebuildConfig: {},
   makers: [
-    // {
-    //   name: '@electron-forge/maker-wix',
-    //   config: {
-    //     language: 1033,
-    //     manufacturer: 'AstraEffect'
-    //   }
-    // },
     {
       name: '@electron-forge/maker-zip',
     },
-    // {
-    //   name: '@electron-forge/maker-deb',
-    //   config: {
-    //     options: {
-    //       maintainer: 'Saturn Maoudis',
-    //       homepage: 'https://astraeffect.com'
-    //     }
-    //   }
-    // },
+    {
+      name: '@electron-forge/maker-deb',
+      config: {
+        options: {
+          maintainer: 'AstraEffect',
+          homepage: 'https://astraeffect.com',
+          icon: __dirname + '/images/icon.png',
+        }
+      }
+    },
   ],
 };

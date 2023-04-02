@@ -1,6 +1,6 @@
 {
   "name": "shlay-desktop",
-  "version": "0.1.3",
+  "version": "1.3.2",
   "description": "Shlay Desktop",
   "main": "main.js",
   "scripts": {

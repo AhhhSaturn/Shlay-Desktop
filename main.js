@@ -1,10 +1,15 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+let isSingleInstance = app.requestSingleInstanceLock()
+if (!isSingleInstance) {
+    app.quit()
+};
+
 const loadMainWindow = () => {
     const mainWindow = new BrowserWindow({
         fullscreen: true,
-        alwaysOnTop: true,
+        alwaysOnTop: false,
         frame: false,  
         resizable: false,
         webPreferences: {
@@ -15,6 +20,7 @@ const loadMainWindow = () => {
     });
     mainWindow.loadFile(path.join(__dirname, '/src/index.html'));
 }
+
 app.on('ready', loadMainWindow);
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
