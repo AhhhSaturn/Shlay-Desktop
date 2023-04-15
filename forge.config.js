@@ -2,6 +2,12 @@
 module.exports = {
   packagerConfig: {
     icon: __dirname + '/images/icon',
+    protocols: [
+      {
+        name: 'Shlay',
+        schemes: ['shlay'],
+      },
+    ]
   },
   rebuildConfig: {},
   makers: [
@@ -11,6 +17,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-deb',
       config: {
+        mimeType: ['x-scheme-handler/shlay'],
         options: {
           maintainer: 'AstraEffect',
           homepage: 'https://astraeffect.com',

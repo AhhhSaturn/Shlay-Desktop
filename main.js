@@ -21,7 +21,11 @@ const loadMainWindow = () => {
     mainWindow.loadFile(path.join(__dirname, '/src/index.html'));
 }
 
-app.on('ready', loadMainWindow);
+
+app.on('ready', () => {
+    loadMainWindow();
+    app.setAsDefaultProtocolClient('shlay');
+});
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
       app.quit();
@@ -30,5 +34,12 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         loadMainWindow();
+    }
+});
+
+app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (mainWindow) {
+        if (mainWindow.isMinimized()) mainWindow.restore()
+        mainWindow.focus()
     }
 });
