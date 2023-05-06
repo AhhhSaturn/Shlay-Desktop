@@ -7,8 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: |
-         cd ..
-         npm install
+        run: npm install
       - name: Build for Linux
         run: npm run make -- --platform=linux
