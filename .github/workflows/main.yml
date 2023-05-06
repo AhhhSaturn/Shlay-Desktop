@@ -2,14 +2,11 @@ on:
  workflow_dispatch:
 jobs:
   buildLinuxApp:
-    name: build linux app
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 20.x.x
       - name: Install Dependencies
-        run: npm i -D
+        run: npm install
+        
       - name: Build for Linux
         run: npm run make -- --platform=linux
