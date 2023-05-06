@@ -6,7 +6,60 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      
       - name: Install Dependencies
         run: npm install
+        
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        
       - name: Build for Linux
         run: npm run make -- --platform=linux
+        
+      - uses: actions/upload-artifact@v2
+        with:
+          name: linuxZip
+          path: ./out/make/zip/linux/x64/shlay-desktop-linux-${{ steps.package-version.outputs.current-version}}.zip
+      - uses: actions/upload-artifact@v2
+        with:
+         name: linuxDeb
+         path: ./out/make/deb/x64/shlay-desktop_${{ steps.package-version.outputs.current-version}}_amd64.deb
+         
+  buildWindowsApp:
+   runs-on: windows-latest
+   
+   steps:
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: npm install
+    - name: Build for Windows (installer)
+      run: echo "would build for windows here"
+    - name: Build for Windows (zip)
+      run: npm run make -- --platform=win32
+      
+    - uses: actions/upload-artifact@v2
+      with:
+       name: windowsZip
+       path: ./out/make/zip/win32/x64/shlay-desktop-win32-x64-${{ steps.package-version.outputs.current-version}}.zip
+
+  publishRelease:
+   needs: [buildLinuxApp, buildWindowsApp]
+   
+   publish:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v2
+     
+     - uses: actions/download-artifact@v2
+       with:
+         name: |
+          linuxZip
+          linuxDeb
+          windowsZip
+     
+     - name: release
+       uses: softprops/actions-gh-releases@v1
+       with:
+        files: |
+         
