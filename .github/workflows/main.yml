@@ -10,8 +10,6 @@ jobs:
         with:
           node-version: '20.x'
       - name: Install Dependencies
-        run: |
-         cd /home/runner/work/Shlay-Desktop
-         npm install
+        run: npm install
       - name: Build for Linux
         run: npm run make -- --platform=linux
