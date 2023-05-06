@@ -4,9 +4,6 @@ jobs:
   buildLinuxApp:
     runs-on: ubuntu-latest
     
-    steps:
-      - name: Install Dependencies
-        run: npm install
-        
+    steps:        
       - name: Build for Linux
         run: npm run make -- --platform=linux
