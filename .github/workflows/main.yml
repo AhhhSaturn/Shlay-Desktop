@@ -10,6 +10,8 @@ jobs:
         with:
           node-version: '20.x'
       - name: Install Dependencies
-        run: npm install
+        run: |
+         ls
+         npm install
       - name: Build for Linux
         run: npm run make -- --platform=linux
